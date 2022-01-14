@@ -1,7 +1,9 @@
-const express = require("express")
-const app = express()
-const port = 3001
+const express = require("express");
+const app = express();
+const port = 3001;
+
+require('./routers')( app );
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${ port }`)
-})
+  console.log(`Example app listening at http://localhost:${ port }`);
+});

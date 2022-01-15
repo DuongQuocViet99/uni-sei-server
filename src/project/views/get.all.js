@@ -5,5 +5,4 @@ module.exports = ( req, res ) => {
   db.all("SELECT * FROM project", ( err, rows ) => {
     res.json( rows );
   });
-  db.close();
 };

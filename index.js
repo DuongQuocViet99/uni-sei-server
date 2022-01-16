@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 3001;
 
+require('./configs')( app );
 require('./routers')( app );
 
 app.listen(port, () => {

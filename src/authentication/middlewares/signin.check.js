@@ -5,14 +5,15 @@ const db = new sqlite3.Database('./db.sqlite3');
 module.exports = ( req, res, next ) => {
   const { username, password } = req.body;
   
-  db.each("SELECT * FROM user", ( err, row ) => {
+  db.all(`SELECT * FROM user WHERE username='${ username }'`, ( err, row ) => {
     bcrypt.compare( password, row.password, ( err, result ) => {
-      if( row.username === username && result ) {
+      if( row.username && result ) {
         res.locals.user = row;
         res.locals.password = password;
         next();
       } else {
         res.send('Incorrect password or account !');
+        return;
       }
     });
   });

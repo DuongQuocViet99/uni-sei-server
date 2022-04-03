@@ -6,8 +6,8 @@ module.exports = ( req, res, next ) => {
   const { username, password } = req.body;
   
   db.all(`SELECT * FROM user WHERE username='${ username }'`, ( err, row ) => {
-    bcrypt.compare( password, row.password, ( err, result ) => {
-      if( row.username && result ) {
+    bcrypt.compare( password, row[0].password, ( err, result ) => {
+      if( row[0].username && result ) {
         res.locals.user = row;
         res.locals.password = password;
         next();
